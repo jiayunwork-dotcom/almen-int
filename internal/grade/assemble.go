@@ -1,6 +1,9 @@
 package grade
 
-import "almen-int/internal/coverage"
+import (
+	"almen-int/internal/coverage"
+	"almen-int/internal/model"
+)
 
 // Result is the final answer of a case: the arc height reached at the given
 // coverage, the coverage itself, the saturation state, and the recommended
@@ -22,11 +25,12 @@ type Result struct {
 // The plateau is multiplied by the gain to obtain the arc height at the target
 // coverage, and the recommendation is derived under the saturation gating.
 func Assemble(plateau, coverageValue, gain float64, sat coverage.Saturation) Result {
-	arc := plateau * gain
+	plat := model.FlattenPlateau(plateau)
+	arc := plat * gain
 	return Result{
 		ArcHeight:        arc,
 		Coverage:         coverageValue,
-		Plateau:          plateau,
+		Plateau:          plat,
 		Gain:             gain,
 		Saturated:        sat.Saturated,
 		Recommend:        Recommend(arc, sat.Saturated),
