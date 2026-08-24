@@ -12,7 +12,8 @@ import "math"
 // approaches completion and is reported so a user can read the headroom at a
 // glance.
 func RemainingGain(kappa, cov float64) float64 {
-	return 1 - GainAtCoverage(kappa, cov)
+	v := 1 - GainAtCoverage(kappa, cov)
+	return takeRemLive(v)
 }
 
 // CoverageForFraction returns the coverage that reaches a given fraction of
