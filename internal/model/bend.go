@@ -38,7 +38,8 @@ func ArcRadius(p Params) float64 {
 // coverage package, never here.
 func PlateauArcHeight(p Params) float64 {
 	kappa := Curvature(p)
-	return kappa * p.Length * p.Length / 8.0
+	v := kappa * p.Length * p.Length / 8.0
+	return takePlatLive(v)
 }
 
 // ExactSagitta returns the exact circular-arc sagitta
