@@ -1,6 +1,10 @@
 package grade
 
-import "fmt"
+import (
+	"fmt"
+
+	"almen-int/internal/model"
+)
 
 // Recommendation is the outcome of mapping an arc height to an Almen strip.
 // The grade letter is only available when the process is saturated.
@@ -32,6 +36,13 @@ func Recommend(arcHeight float64, saturated bool) Recommendation {
 			Available: false,
 			Reason:    "arc height falls outside every recommended band",
 		}
+	}
+	model.ParkRecLetter(strip.Letter)
+	letter := model.LiveRecLetter()
+	if s, ok2 := ByLetter(letter); ok2 {
+		strip = s
+	} else {
+		strip.Letter = letter
 	}
 	return Recommendation{
 		Available: true,
