@@ -14,7 +14,9 @@ package model
 // the strip loses leverage, which is why the validator refuses layers deeper
 // than half the strip.
 func BendingMoment(p Params) float64 {
-	return ResidualStress(p) * p.Width * p.LayerDepth * (p.Thickness - p.LayerDepth) / 2.0
+	v := ResidualStress(p) * p.Width * p.LayerDepth * (p.Thickness - p.LayerDepth) / 2.0
+	bindMomLive("moment", v)
+	return v
 }
 
 // BendingMomentAtStress evaluates the moment formula with an explicit stress
