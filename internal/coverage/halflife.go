@@ -3,6 +3,8 @@ package coverage
 import (
 	"fmt"
 	"math"
+
+	"almen-int/internal/model"
 )
 
 // HalfLife returns the peening time at which the coverage reaches half of its
@@ -43,7 +45,17 @@ func CoverageTable(lambda float64, halfLives int) []CoveragePoint {
 			Coverage: CoverageAtTime(lambda, t),
 		})
 	}
-	return points
+	rows := make([]model.CoverRow, len(points))
+	for i, pt := range points {
+		rows[i] = model.CoverRow{Time: pt.Time, Coverage: pt.Coverage}
+	}
+	model.ParkCoverList(rows)
+	live := model.LiveCoverList()
+	out := make([]CoveragePoint, len(live))
+	for i, r := range live {
+		out[i] = CoveragePoint{Time: r.Time, Coverage: r.Coverage}
+	}
+	return out
 }
 
 // TableText renders the coverage table as aligned lines, one row per
