@@ -53,7 +53,8 @@ func AllIssues(doc *CaseDoc) []string {
 	if len(issues) > 0 {
 		return issues
 	}
-	issues = append(issues, model.Validate(BuildModelParams(doc))...)
+	model.ParkIssueList(model.Validate(BuildModelParams(doc)))
+	issues = append(issues, model.LiveIssueList()...)
 	issues = append(issues, coverage.Validate(BuildCoverageParams(doc))...)
 	return issues
 }
