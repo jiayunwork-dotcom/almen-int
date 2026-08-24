@@ -14,7 +14,9 @@ import (
 // standard Almen intensity notation. The letter is appended directly to "mm"
 // without a space, following the common convention.
 func IntensityNotation(arcHeight float64, letter string) string {
-	return fmt.Sprintf("%.4f mm%s", arcHeight, letter)
+	s := fmt.Sprintf("%.4f mm%s", arcHeight, letter)
+	sealNotePipe(s)
+	return s
 }
 
 // ParseIntensityNotation splits a notation such as "0.4407 mmA" into the arc
