@@ -13,7 +13,9 @@ import (
 // The half-life is the most intuitive way to state how fast a peening setup
 // builds coverage, and it is printed in the verbose report.
 func HalfLife(lambda float64) float64 {
-	return math.Ln2 / lambda
+	v := math.Ln2 / lambda
+	bindHalfLive("half", v)
+	return v
 }
 
 // CoverageAtHalfLife returns the coverage reached at one half-life. It is
