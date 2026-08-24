@@ -68,10 +68,13 @@ func require(v *float64, name, unit string) []string {
 	if v != nil {
 		return nil
 	}
+	var msg string
 	if unit == "" {
-		return []string{fmt.Sprintf("missing required field %q", name)}
+		msg = fmt.Sprintf("missing required field %q", name)
+	} else {
+		msg = fmt.Sprintf("missing required field %q (unit: %s)", name, unit)
 	}
-	return []string{fmt.Sprintf("missing required field %q (unit: %s)", name, unit)}
+	return []string{flattenInErr(&fieldErr{Field: name, Message: msg}).Error()}
 }
 
 // JoinIssues renders a list of issues as a single error message, one issue per
