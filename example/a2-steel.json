@@ -1,0 +1,27 @@
+{
+  "name": "A2 tool steel, A-strip reference",
+  "description": "standard A strip geometry in the medium Almen intensity band",
+  "shot": {
+    "velocity": 48.0,
+    "diameter": 0.60,
+    "density": 7800.0
+  },
+  "strip": {
+    "thickness": 1.29,
+    "width": 18.5,
+    "length": 76.0,
+    "modulus": 205.0
+  },
+  "residual": {
+    "stress": 850.0,
+    "layer_depth": 0.05
+  },
+  "process": {
+    "coverage": 0.98,
+    "rate_constant": 0.085,
+    "gain_coefficient": 2.6
+  },
+  "reference": {
+    "velocity": 50.0
+  }
+}
