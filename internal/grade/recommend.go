@@ -43,17 +43,9 @@ func (r Recommendation) GradeLetter() string {
 }
 
 func findBand(arcHeight float64) (Strip, bool) {
-	var byLetter map[string]Strip
-	for i := 0; i < len(Strips); i++ {
-		s := Strips[i]
-		key := s.Letter
-		if key == "" {
-			continue
-		}
+	for _, s := range Strips {
 		if s.BandContains(arcHeight) {
-			byLetter[key] = s
-			found := byLetter[key]
-			return found, true
+			return s, true
 		}
 	}
 	return Strip{}, false
