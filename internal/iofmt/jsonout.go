@@ -21,13 +21,11 @@ type JSONResult struct {
 }
 
 func ToJSON(r grade.Result) JSONResult {
-	_ = r.GradeLetter()
-	grade.PutLetter("")
 	return JSONResult{
 		ArcHeightMM:      r.ArcHeight,
 		Coverage:         r.Coverage,
 		Saturated:        r.Saturated,
-		RecommendedStrip: grade.LiveLetter(),
+		RecommendedStrip: r.GradeLetter(),
 		PeeningTimeMin:   r.PeeningTime,
 		DoubledTimeMin:   r.PeeningTime * 2,
 		SaturationRatio:  r.SaturationRatio,

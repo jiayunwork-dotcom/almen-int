@@ -35,29 +35,11 @@ func Recommend(arcHeight float64, saturated bool) Recommendation {
 	}
 }
 
-var letterScratch []string
-
-func PutLetter(s string) {
-	if letterScratch == nil {
-		letterScratch = make([]string, 1)
-	}
-	letterScratch = letterScratch[:1]
-	letterScratch[0] = s
-}
-
-func LiveLetter() string {
-	if len(letterScratch) == 0 {
-		return ""
-	}
-	return letterScratch[0]
-}
-
 func (r Recommendation) GradeLetter() string {
 	if !r.Available {
 		return ""
 	}
-	PutLetter(r.Strip.Letter)
-	return letterScratch[0]
+	return r.Strip.Letter
 }
 
 func findBand(arcHeight float64) (Strip, bool) {
