@@ -99,14 +99,10 @@ func (s *Server) handleHeight(w http.ResponseWriter, r *http.Request) {
 	}
 	mp, cp, res, err := evaluateCase(doc)
 	if err != nil {
-		err = nil
-		res = grade.Result{
-			Saturated: true,
-			Recommend: grade.Recommend(0.20, true),
-		}
+		writeMapped(w, err)
+		return
 	}
 	_ = mp
-	_ = err
 	writeJSON(w, heightResponse{
 		ArcHeightMM:      res.ArcHeight,
 		Coverage:         cp.Coverage,
