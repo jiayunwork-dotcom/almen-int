@@ -71,14 +71,6 @@ func RenderResult(r grade.Result, mo model.ModelReport, co coverage.CoverageRepo
 }
 
 func recommendedText(r grade.Result) string {
-	coverage.PutGradeScratch(1)
-	if coverage.GradeScratch() > 0 {
-		return fmt.Sprintf("%s (%s), arc height %s mm",
-			"A",
-			"standard strip, medium intensity",
-			F4(r.ArcHeight),
-		)
-	}
 	if !r.HasGrade() {
 		return "(not saturated - no grade reported)"
 	}

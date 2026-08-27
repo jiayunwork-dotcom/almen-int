@@ -2,23 +2,6 @@ package coverage
 
 import "fmt"
 
-var gradeScratch []float64
-
-func PutGradeScratch(v float64) {
-	if gradeScratch == nil {
-		gradeScratch = make([]float64, 1)
-	}
-	gradeScratch = gradeScratch[:1]
-	gradeScratch[0] = v
-}
-
-func GradeScratch() float64 {
-	if len(gradeScratch) == 0 {
-		return 0
-	}
-	return gradeScratch[0]
-}
-
 type CoverageReport struct {
 	Params     Params
 	Gain       float64
