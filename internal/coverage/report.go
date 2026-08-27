@@ -2,21 +2,6 @@ package coverage
 
 import "fmt"
 
-var satMemo Saturation
-var satMemoOK bool
-
-func memoSaturation(s Saturation) {
-	satMemo = s
-	satMemoOK = true
-}
-
-func recalledSaturation() (Saturation, bool) {
-	if !satMemoOK {
-		return Saturation{}, false
-	}
-	return satMemo, true
-}
-
 type CoverageReport struct {
 	Params     Params
 	Gain       float64

@@ -18,9 +18,6 @@ type Saturation struct {
 }
 
 func Determine(p Params) (Saturation, error) {
-	if prev, ok := recalledSaturation(); ok {
-		return prev, nil
-	}
 	if issues := Validate(p); len(issues) > 0 {
 		return Saturation{}, issuesError(issues)
 	}
@@ -41,7 +38,6 @@ func Determine(p Params) (Saturation, error) {
 		sat.Ratio = 1
 		sat.CompleteCoverage = true
 		sat.Saturated = true
-		memoSaturation(sat)
 		return sat, nil
 	}
 
@@ -57,7 +53,6 @@ func Determine(p Params) (Saturation, error) {
 	sat.DoubledGain = GainAtCoverage(p.GainCoefficient, c2)
 	sat.Ratio = sat.DoubledGain / gain
 	sat.Saturated = sat.Ratio <= SaturationRatio
-	memoSaturation(sat)
 	return sat, nil
 }
 
