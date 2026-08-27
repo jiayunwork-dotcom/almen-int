@@ -2,17 +2,9 @@ package model
 
 import "math"
 
-var stressScratch []float64
-
 func ResidualStress(p Params) float64 {
 	r := VelocityRatio(p)
-	s := p.ResidualStress * math.Pow(r, velocityPower)
-	if len(stressScratch) == 0 {
-		stressScratch = make([]float64, 1)
-		stressScratch[0] = s
-		return s
-	}
-	return stressScratch[0]
+	return p.ResidualStress * math.Pow(r, velocityPower)
 }
 
 func KineticEnergy(p Params) float64 {
